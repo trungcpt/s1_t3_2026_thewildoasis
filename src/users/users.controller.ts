@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -7,38 +8,35 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-
-type User = {
-  id: number;
-  fullName: string;
-};
+import { UsersService } from './users.service';
+import type { User } from './users.entity';
 
 @Controller('users')
 export class UsersController {
-  private users: User[] = [
-    { id: 1, fullName: 'trungcpt' },
-    { id: 2, fullName: 'trungcpt2' },
-    { id: 3, fullName: 'trungcpt3' },
-  ];
+  constructor(private readonly usersService: UsersService) {}
 
   @Get()
   getUsers(@Query('name') query) {
-    console.log('>>> query', query);
-    return this.users;
+    return this.usersService.getUsers(query);
   }
 
-  @Get(':id')
+  @Get(':id') // => /users/:id
   getUser(@Param('id') id: string) {
-    const userFound = this.users.find((user) => user.id === parseInt(id));
-    return userFound;
+    return this.usersService.getUser(id);
   }
 
   @Post()
-  createUser() {}
+  createUser(@Body() userCreate: User) {
+    return this.usersService.createUser(userCreate);
+  }
 
-  @Patch()
-  updateUser() {}
+  @Patch(':id')
+  updateUser(@Param('id') id: string, @Body() updateUser: User) {
+    return this.usersService.updateUser(id, updateUser);
+  }
 
-  @Delete()
-  deleteUser() {}
+  @Delete(':id')
+  deleteUser(@Param('id') id: string) {
+    return this.usersService.deleteUser(id);
+  }
 }
