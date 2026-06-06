@@ -4,12 +4,15 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
+  UsePipes,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import type { User } from './users.entity';
+import { ValidatorPipe } from '../validator/validator.pipe';
 
 @Controller('users')
 export class UsersController {
@@ -21,7 +24,9 @@ export class UsersController {
   }
 
   @Get(':id') // => /users/:id
-  getUser(@Param('id') id: string) {
+  @UsePipes(ValidatorPipe)
+  getUser(@Param('id', ParseIntPipe) id: number) {
+    console.log('>>> id', id);
     return this.usersService.getUser(id);
   }
 

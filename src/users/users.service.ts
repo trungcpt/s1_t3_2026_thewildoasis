@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { User } from './users.entity';
 
 @Injectable()
@@ -13,8 +13,8 @@ export class UsersService {
     return this.users;
   }
 
-  getUser(id: string) {
-    const userFound = this.users.find((user) => user.id === parseInt(id));
+  getUser(id: number) {
+    const userFound = this.users.find((user) => user.id === id);
     return userFound;
   }
 
