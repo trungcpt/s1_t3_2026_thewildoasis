@@ -1,5 +1,5 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { User } from './users.entity';
+import { Injectable } from '@nestjs/common';
+import { User } from './entities/users.entity';
 
 @Injectable()
 export class UsersService {
@@ -15,6 +15,7 @@ export class UsersService {
 
   getUser(id: number) {
     const userFound = this.users.find((user) => user.id === id);
+    if (!userFound) throw new Error('User not found!');
     return userFound;
   }
 

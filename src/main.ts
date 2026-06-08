@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule } from './app/app.module';
 import { applyMiddlewares } from './common/middlewares/common.middleware';
 import { LoggerModule } from './logger/logger.module';
 
