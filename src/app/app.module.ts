@@ -10,9 +10,20 @@ import { ZodExceptionFilter } from '../catch-everything/zod-exception/zod-except
 import { ApiUtilModule } from '../common/utils/api-util/api-util.module';
 import { ZodSerializerInterceptor, ZodValidationPipe } from 'nestjs-zod';
 import { AccessControlGuard } from '../common/guards/access-control/access-control.guard';
+import { ConfigModule } from '@nestjs/config';
+import { validate } from '../common/envs/validate.env';
 
 @Module({
-  imports: [UsersModule, LoggerModule, ApiUtilModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      expandVariables: true,
+      validate: validate,
+    }),
+    UsersModule,
+    LoggerModule,
+    ApiUtilModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,

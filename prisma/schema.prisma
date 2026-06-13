@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["base", "user", "cabin", "booking"]
+}
+
+generator json {
+  provider = "prisma-json-types-generator"
+}
+
+generator zod {
+  provider = "prisma-zod-generator"
+  output   = "../src/generated/zod"
+  config   = "./prisma/zod-generator.config.json"
+}
+
+// Only for dev
+generator custom_generator {
+  provider = "prisma-generator-fake-data"
+  output   = "../src/generated/faker/data.ts"
+}
+
+enum ActivityStatus {
+  ACTIVE
+  INACTIVE
+
+  @@schema("base")
+}

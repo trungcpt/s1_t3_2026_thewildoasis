@@ -1,0 +1,15 @@
+{
+  "sqltools.connections": [
+    {
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "s1_t3_2026_thewildoasis",
+      "database": "db_s1_t3_2026_thewildoasis",
+      "username": "user_s1_t3_2026_thewildoasis",
+      "password": "password_s1_t3_2026_thewildoasis"
+    }
+  ]
+}
